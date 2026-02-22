@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Login - HelpDesk Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+}
+.card{
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(20px);
+    padding:40px;
+    border-radius:20px;
+    width:350px;
+    text-align:center;
+    box-shadow:0 0 40px rgba(0,255,255,0.2);
+}
+h2{
+    color:#fff;
+    margin-bottom:20px;
+    text-shadow:0 0 10px #00f2ff;
+}
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:none;
+    border-radius:10px;
+}
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#00f2ff;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+button:hover{
+    background:#00c3ff;
+    box-shadow:0 0 15px #00f2ff;
+}
+.loading{
+    display:none;
+    margin-top:10px;
+    color:#fff;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+    <h2>HelpDesk Pro</h2>
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="senha" placeholder="Senha">
+    <button onclick="login()">Entrar</button>
+    <div class="loading" id="loading">Carregando...</div>
+</div>
+
+<script>
+async function login(){
+    document.getElementById("loading").style.display="block";
+
+    const response = await fetch("http://127.0.0.1:5000/login",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+            email:email.value,
+            senha:senha.value
+        })
+    });
+
+    const data = await response.json();
+    document.getElementById("loading").style.display="none";
+
+    if(response.ok){
+        localStorage.setItem("token", data.token);
+        window.location.href="dashboard.html";
+    }else{
+        alert(data.msg);
+    }
+}
+</script>
+
+</body>
+</html>

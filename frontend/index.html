@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema Futurista</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Orbitron', sans-serif;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    background: linear-gradient(-45deg,#0f2027,#203a43,#2c5364,#000428);
+    background-size:400% 400%;
+    animation: bgMove 10s infinite alternate;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    100%{background-position:100% 50%;}
+}
+
+/* CARD LOGIN */
+.login-card{
+    backdrop-filter: blur(20px);
+    background: rgba(255,255,255,0.05);
+    padding:40px;
+    border-radius:20px;
+    width:320px;
+    text-align:center;
+    box-shadow:0 0 25px #00f2ff;
+    animation: float 3s infinite ease-in-out;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+}
+
+.login-card h2{
+    margin-bottom:20px;
+    font-size:26px;
+    text-shadow:0 0 10px #00f2ff,0 0 20px #00f2ff;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    background:rgba(255,255,255,0.1);
+    color:white;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:10px;
+    background:#00f2ff;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+    margin-top:10px;
+}
+
+button:hover{
+    box-shadow:0 0 20px #00f2ff;
+}
+
+/* LOADING */
+.loading{
+    margin-top:15px;
+    display:none;
+}
+
+.loading span{
+    display:inline-block;
+    width:10px;
+    height:10px;
+    margin:3px;
+    background:#00f2ff;
+    border-radius:50%;
+    animation: bounce 0.6s infinite alternate;
+}
+
+.loading span:nth-child(2){animation-delay:0.2s;}
+.loading span:nth-child(3){animation-delay:0.4s;}
+
+@keyframes bounce{
+    to{transform:translateY(-10px);}
+}
+
+/* DASHBOARD */
+.dashboard{
+    position:absolute;
+    inset:0;
+    display:none;
+    background:#0f172a;
+}
+
+.sidebar{
+    width:200px;
+    background:#111827;
+    height:100%;
+    padding:20px;
+    position:absolute;
+    left:0;
+    top:0;
+}
+
+.sidebar h2{
+    margin-bottom:20px;
+}
+
+.sidebar button{
+    width:100%;
+    margin:10px 0;
+    background:#1f2937;
+    color:white;
+}
+
+.sidebar button:hover{
+    background:#00f2ff;
+    color:black;
+}
+
+.content{
+    margin-left:200px;
+    padding:40px;
+    height:100%;
+}
+
+.card{
+    padding:20px;
+    background:rgba(255,255,255,0.05);
+    border-radius:15px;
+    box-shadow:0 0 15px #00f2ff;
+    animation: fade .5s;
+}
+
+@keyframes fade{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="login-card" id="login">
+    <h2>LOGIN</h2>
+    <input type="email" placeholder="Email">
+    <input type="password" placeholder="Senha">
+    <button onclick="entrar()">Entrar</button>
+
+    <div class="loading" id="loading">
+        <span></span><span></span><span></span>
+    </div>
+</div>
+
+<div class="dashboard" id="dashboard">
+    <div class="sidebar">
+        <h2>Sistema</h2>
+        <button onclick="mostrar('dash')">Dashboard</button>
+        <button onclick="mostrar('chamados')">Chamados</button>
+        <button onclick="sair()">Sair</button>
+    </div>
+
+    <div class="content">
+        <div id="dash" class="card">
+            <h1>📊 Dashboard</h1>
+            <p>Visão geral do sistema.</p>
+        </div>
+
+        <div id="chamados" class="card" style="display:none;">
+            <h1>📂 Chamados</h1>
+            <p>Lista de chamados ativos.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+function entrar(){
+    document.getElementById("loading").style.display="block";
+    setTimeout(()=>{
+        document.getElementById("login").style.display="none";
+        document.getElementById("dashboard").style.display="block";
+    },1500);
+}
+
+function mostrar(secao){
+    document.getElementById("dash").style.display="none";
+    document.getElementById("chamados").style.display="none";
+    document.getElementById(secao).style.display="block";
+}
+
+function sair(){
+    location.reload();
+}
+</script>
+
+</body>
+</html>

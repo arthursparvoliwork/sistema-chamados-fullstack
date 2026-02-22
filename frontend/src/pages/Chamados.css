@@ -1,0 +1,41 @@
+.chamados {
+  padding: 40px;
+  background: #111827;
+  min-height: 100vh;
+  color: white;
+}
+
+.filtros {
+  margin-bottom: 20px;
+}
+
+.filtros button {
+  margin-right: 10px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #374151;
+  color: white;
+}
+
+.filtros .ativo {
+  background: #3b82f6;
+}
+
+.lista {
+  display: grid;
+  gap: 15px;
+}
+
+.chamado-card {
+  background: #1f2937;
+  padding: 15px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.chamado-card:hover {
+  background: #374151;
+  transform: scale(1.02);
+}
